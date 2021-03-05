@@ -8,6 +8,7 @@ import {TextStyle} from '../../../TextStyle';
 import {uploadArrow} from '../../images';
 import {DropZoneContext} from '../../context';
 import {useI18n} from '../../../../utilities/i18n';
+import {pluralSuffix} from '../../utils';
 
 import styles from './FileUpload.scss';
 
@@ -18,10 +19,10 @@ export interface FileUploadProps {
 
 export function FileUpload(props: FileUploadProps) {
   const i18n = useI18n();
-  const {size, measuring, type, focused, disabled} = useContext(
+  const {size, measuring, type, focused, disabled, allowMultiple} = useContext(
     DropZoneContext,
   );
-  const suffix = capitalize(type);
+  const suffix = `${capitalize(type)}${pluralSuffix(allowMultiple)}`;
   const {
     actionTitle = i18n.translate(
       `Polaris.DropZone.FileUpload.actionTitle${suffix}`,

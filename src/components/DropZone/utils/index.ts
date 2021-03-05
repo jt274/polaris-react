@@ -57,3 +57,9 @@ function isChangeEvent(
 ): event is React.ChangeEvent<HTMLInputElement> {
   return Object.prototype.hasOwnProperty.call(event, 'target');
 }
+
+export const defaultAllowMultiple = true;
+
+export function pluralSuffix(isPural: boolean) {
+  return isPural ? 's' : '';
+}
