@@ -28,7 +28,7 @@ export const Row = memo(function Row({
   subdued,
   onNavigation,
 }: RowProps) {
-  const {selectMode, condensed} = useIndexRow();
+  const {selectMode, condensed, selectable} = useIndexRow();
   const onSelectionChange = useIndexSelectionChange();
   const {
     value: hovered,
@@ -120,7 +120,7 @@ export const Row = memo(function Row({
           onClick={handleRowClick}
           ref={tableRowRef}
         >
-          <Checkbox />
+          {selectable ?? <Checkbox />}
           {children}
         </RowWrapper>
       </RowHoveredContext.Provider>

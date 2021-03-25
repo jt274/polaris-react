@@ -45,6 +45,7 @@ export interface IndexTableBaseProps {
   children?: React.ReactNode;
   emptyState?: React.ReactNode;
   sort?: React.ReactNode;
+  selectable?: boolean;
 }
 
 export interface TableHeadingRect {
@@ -76,6 +77,7 @@ function IndexTableBase({
     hasMoreItems,
     selectedItemsCount,
     condensed,
+    selectable,
   } = useIndexValue();
   const handleSelectionChange = useIndexSelectionChange();
   const i18n = useI18n();
@@ -290,9 +292,10 @@ function IndexTableBase({
     }
   }, [condensed, isSmallScreenSelectable]);
 
-  const selectable = Boolean(
+  const isSelectable = Boolean(
     (promotedBulkActions && promotedBulkActions.length > 0) ||
-      (bulkActions && bulkActions.length > 0),
+      (bulkActions && bulkActions.length > 0) ||
+      selectable,
   );
 
   const headingsMarkup = headings
@@ -674,7 +677,7 @@ function IndexTableBase({
   }
 
   function getPaginatedSelectAllAction() {
-    if (!selectable || !hasMoreItems) {
+    if (!isSelectable || !hasMoreItems) {
       return;
     }
 
@@ -722,7 +725,7 @@ export function IndexTable({
 }: IndexTableProps) {
   return (
     <IndexProvider
-      selectable={selectable}
+      selectable={isSelectable}
       itemCount={itemCount}
       selectedItemsCount={selectedItemsCount}
       resourceName={passedResourceName}
