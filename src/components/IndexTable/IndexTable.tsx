@@ -713,7 +713,7 @@ export interface IndexTableProps
 
 export function IndexTable({
   children,
-  selectable,
+  selectable: isSelectable,
   itemCount,
   selectedItemsCount,
   resourceName: passedResourceName,
